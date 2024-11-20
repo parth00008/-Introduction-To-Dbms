@@ -1,0 +1,138 @@
+FOREIGN KEY
+
+1. Create Table Name : Student and Exam
+
+CREATE TABLE student(rollno int(4) NOT null AUTO_INCREMENT PRIMARY KEY,name varchar(30),branch varchar(70));
+
+
+INSERT INTO student(name,branch) VALUES ('jay','computer science'),('suhani','electric and com'),('kriti','electric and com');
+
+CREATE TABLE exam(rollno int(7) NOT null,s_code varchar(5),marks int(2),p_code varchar(7),FOREIGN KEY(rollno) REFERENCES student(rollno));
+
+INSERT INTO `exam` (`rollno`, `s_code`, `marks`, `p_code`) VALUES ('1', 'CS11', '50', 'CS');
+INSERT INTO `exam` (`rollno`, `s_code`, `marks`, `p_code`) VALUES ('1', 'CS11', '60', 'CS');
+INSERT INTO `exam` (`rollno`, `s_code`, `marks`, `p_code`) VALUES ('2', 'EC101', '66', 'EC');
+INSERT INTO `exam` (`rollno`, `s_code`, `marks`, `p_code`) VALUES ('2', 'EC102', '70', 'EC');
+INSERT INTO `exam` (`rollno`, `s_code`, `marks`, `p_code`) VALUES ('3', 'EC101', '45', 'EC');
+INSERT INTO `exam` (`rollno`, `s_code`, `marks`, `p_code`) VALUES ('3', 'EC102', '50', 'EC');
+
+
+2. Create table given below 
+
+
+CREATE TABLE TASK2(first_name varchar(20),last_name varchar(20),address varchar(30),city varchar(20),age int(15));
+
+
+INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('mickey', 'mouse', '123 fantasy way', 'anaheim', '73'), ('bat', 'man', '321 cavern ave', 'gotham', '54');
+INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('wonder', 'women', '987 truth way', 'paradise', '39'), ('donald', 'duck', '555 quack street', 'mallard', '65');
+INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('bugs', 'bunny', '567 carrot street', 'rascal', '58'), ('wiley', 'coyote', '999 acme way', 'canyon', '61');
+
+INSERT INTO `task2` (`first_name`, `last_name`, `address`, `city`, `age`) VALUES ('cat', 'women', '234 purrfect street', 'hairball', '32'), ('tweety', 'bird', '543', 'itotltaw', '28');
+
+task 3
+3. Create table given below: Employee and Incentive
+
+employee
+
+CREATE TABLE employee(employee_id int(9) NOT null PRIMARY KEY AUTO_INCREMENT,first_name varchar(10),last_name varchar(10),salary int(9),joining_date varchar(50),department varchar(20));
+
+
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES ('1', 'john', 'abraham', '1000000', '01-JAN-13 12.00.00 AM', 'banking'), (2, 'michael', 'clarke', '800000', '01-JAN-13 12.00.00 AM', 'insurance');
+
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES (3, 'roy', 'thomes', '700000', '01-FEB-13 12.00.00 AM', 'banking'), (4, 'tom', 'jose', '600000', '01-FEB-13 12.00.00 AM', 'insurance');
+
+
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES (5, 'jerry', 'pinto', '650000', '01-FEB-13 12.00.00 AM', 'insurance'), (6, 'philip', 'mathew', '750000', '01-JAN-13 12.00.00 AM', 'services');
+
+INSERT INTO `employee` (`employee_id`, `first_name`, `last_name`, `salary`, `joining_date`, `department`) VALUES ('7', 'testname1', '123', '650000', '01-JAN-13 12.00.00 AM', 'services'), ('8', 'testname2', 'lname%', '600000', '01-FEB-13 12.00.00 AM', 'insurance');
+
+
+incentive
+
+CREATE TABLE incentive(employee_ref_id int(6),incentive_data varchar(60),incentive_amount int(5));
+
+INSERT INTO `incentive` (`employee_ref_id`, `incentive_data`, `incentive_amount`) VALUES ('1', '01-FEB-13', '5000'), ('2', '01-FEB-13', '3000');
+
+INSERT INTO `incentive` (`employee_ref_id`, `incentive_data`, `incentive_amount`) VALUES ('3', '01-FEB-13', '4000'), ('1', '01-JAN-13', '4500');
+
+INSERT INTO `incentive` (`employee_ref_id`, `incentive_data`, `incentive_amount`) VALUES ('2', '01-JAN-13', '3500');
+
+
+
+a) Get First_Name from employee table using Tom name “Employee Name”.
+
+SELECT * FROM employee WHERE first_name='tom';
+
+b) Get FIRST_NAME, Joining Date, and Salary from employee table. 
+
+SELECT first_name,joining_date,salary FROM employee;
+
+c) Get all employee details from the employee table order by First_Name 
+Ascending and Salary descending?
+
+SELECT * FROM employee ORDER BY employee.first_name ASC,employee.salary DESC;
+
+note:- SELECT * FROM employee ORDER BY employee.first_name ASC;
+       SELECT * FROM employee ORDER BY employee.salary DESC;
+
+d) Get employee details from employee table whose first name contains ‘J’.
+
+SELECT * FROM employee WHERE first_name LIKE '%j%';
+
+e) Get department wise maximum salary from employee table order by salary 
+ascending?
+
+SELECT * FROM employee ORDER BY salary ASC;
+
+f) Select first_name, incentive amount from employee and incentives table for 
+those employees who have incentives and incentive amount greater than 3000 
+
+SELECT first_name,incentive_amount FROM employee INNER JOIN incentive ON employee.employee_id=incentive.employee_ref_id AND incentive_amount>3000;
+
+
+4. Create table given below: Salesperson and Customer
+
+salesperson
+
+CREATE TABLE salesperson(pk_sno int(5),sname varchar(20),city varchar(20),comm varchar(10));
+
+
+INSERT INTO salesperson(pk_sno,sname,city,comm) VALUES (1001,'peel','london','.12'),(1002,'serres','sanjose','.13'),(1004,'motika','london','.11'),(1007,'rafkin','barcelona','.15'),(1003,'axelrod','.1');
+
+customer
+
+CREATE TABLE customer(pk_cnm int(5),cname varchar(10),city varchar(10),rating int(4),pk_sno int(6),PRIMARY KEY pk_cnm,FOREIGN KEY pk_sno REFERENCES salesperson pk_sno);
+
+INSERT INTO `customer` (`pk_cnm`, `cname`, `city`, `rating`, `fk_sno`) VALUES ('201', 'hoffman', 'london', '100', '1001'), ('202', 'giovanne', 'roe', '200', '1003');
+INSERT INTO `customer` (`pk_cnm`, `cname`, `city`, `rating`, `fk_sno`) VALUES ('203', 'liu', 'san jose', '300', '1002'), ('204', 'grass', 'barcelona', '100', '1002');
+INSERT INTO `customer` (`pk_cnm`, `cname`, `city`, `rating`, `fk_sno`) VALUES ('206', 'clemens', 'london', '300', '1007'), ('207', 'pereira', 'roe', '100', '1004');
+
+Retrieve the below data from above table 
+SELECT * FROM customer;
+SELECT * FROM salesperson;
+
+a) All orders for more than $1000. 
+
+SELECT * FROM customer WHERE fk_sno > 1000;
+
+b) Names and cities of all salespeople in London with commission above 0.12
+
+SELECT sname,city,comm FROM salesperson WHERE comm>0.12 AND city='london';
+
+c) All salespeople either in Barcelona or in London
+
+SELECT sname,city FROM salesperson WHERE city IN ('barcelona','london');
+
+d) All salespeople with commission between 0.10 and 0.12. (Boundary values 
+should be excluded). 
+
+SELECT sname , comm FROM salesperson WHERE comm > 0.10 AND comm < 0.12;
+
+
+e) All customers excluding those with rating <= 100 unless they are located in 
+Rome
+
+SELECT cname FROM customer WHERE rating <= 100 OR city = 'rome';
+
+
+
